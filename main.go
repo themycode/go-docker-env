@@ -1,9 +1,10 @@
 package main
 
 import (
-"fmt"
-"log"
-"net/http"
+	"fmt"
+	"log"
+	"net/http"
+	"src"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -25,7 +26,8 @@ Hello from Docker!
 }
 
 func main() {
+	fmt.Println(src.Str("hello"))
+	fmt.Println("hello world")
 	http.HandleFunc("/", handler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
-
