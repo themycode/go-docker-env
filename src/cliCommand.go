@@ -1,4 +1,4 @@
-package main
+package src
 
 import (
 	"fmt"
@@ -64,18 +64,19 @@ func goTool() {
 	var debug bool
 
 	app.Flags = []cli.Flag{
-		cli.StringFlag{
+
+		&cli.StringFlag{
 			Name:        "host",
 			Value:       "127.0.0.1",
 			Usage:       "server Address",
 			Destination: &host,
 		},
-		cli.IntFlag{
+		&cli.IntFlag{
 			Name:  "port,p",
 			Value: 8888,
 			Usage: "Server port",
 		},
-		cli.BoolFlag{
+		&cli.BoolFlag{
 			Name:        "debug",
 			Usage:       "debug mode",
 			Destination: &debug,
@@ -83,9 +84,13 @@ func goTool() {
 	}
 	app.Action = func(c *cli.Context) error {
 		fmt.Printf("host = %v \n", host)
-		fmt.Printf("host = %v \n", c.Int("port")) // 不使用变量接收，直接解析
-		fmt.Printf("host = %v \n", debug)
+		fmt.Printf("port = %v \n", c.Int("port")) // 不使用变量接收，直接解析
+		fmt.Printf("debug = %v \n", debug)
+		return nil
+	}
 
+	if err := app.Run(os.Args); err != nil {
+		log.Fatal(err)
 	}
 }
 

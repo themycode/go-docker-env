@@ -4,9 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
-	"os"
 
 	src "github.com/themycode/go-docker-env/src"
 )
@@ -71,15 +69,17 @@ func HttpReq(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	fmt.Println(src.Str("hello"))
-	http.HandleFunc("/http", HttpReq)
-	http.HandleFunc("/", handler)
-	http.HandleFunc("/env", handlerFunc)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	// fmt.Println(src.Str("hello"))
+	// http.HandleFunc("/http", HttpReq)
+	// http.HandleFunc("/", handler)
+	// http.HandleFunc("/env", handlerFunc)
+	// log.Fatal(http.ListenAndServe(":8080", nil))
 
 	// run RootCommand
-	if err := src.RootCommand.Execute(); err != nil {
-		fmt.Println("err:", os.Stderr, err)
-		os.Exit(1)
-	}
+	// if err := src.RootCommand.Execute(); err != nil {
+	// 	fmt.Println("err:", os.Stderr, err)
+	// 	os.Exit(1)
+	// }
+
+	src.Execute()
 }
